@@ -82,22 +82,19 @@ public class Staff_Login extends javax.swing.JFrame {
                     .addComponent(loginbtn)
                     .addComponent(jLabel1))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 129, Short.MAX_VALUE)
-                .addComponent(jLabel4)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(roleComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(125, 125, 125))
             .addGroup(layout.createSequentialGroup()
                 .addGap(101, 101, 101)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel2)
-                    .addComponent(jLabel3))
+                    .addComponent(jLabel3)
+                    .addComponent(jLabel4))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(passwordTxt)
-                    .addComponent(idTxt, javax.swing.GroupLayout.DEFAULT_SIZE, 143, Short.MAX_VALUE))
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(roleComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(passwordTxt)
+                        .addComponent(idTxt, javax.swing.GroupLayout.DEFAULT_SIZE, 143, Short.MAX_VALUE)))
+                .addGap(0, 101, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -114,8 +111,8 @@ public class Staff_Login extends javax.swing.JFrame {
                     .addComponent(jLabel3))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel4)
-                    .addComponent(roleComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(roleComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel4))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 40, Short.MAX_VALUE)
                 .addComponent(loginbtn)
                 .addGap(40, 40, 40))
@@ -127,36 +124,60 @@ public class Staff_Login extends javax.swing.JFrame {
     private void loginbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginbtnActionPerformed
         // TODO add your handling code here:
         try {
-            String filename = "admin.txt";
+            String idgui = idTxt.getText();
+            String passwordgui = new String(passwordTxt.getPassword());
+            String selectedRole = roleComboBox.getSelectedItem().toString(); // Get selected role
+
+            // Determine the correct file based on role selection
+            String filename = "";
+            if (selectedRole.equals("Admin")) {
+                filename = "src/main/java/com/mycompany/fos_app/Data/admin.txt";
+            } else if (selectedRole.equals("Vendor")) {
+                filename = "src/main/java/com/mycompany/fos_app/Data/vendor.txt";
+            } else if (selectedRole.equals("Runner")) {
+                filename = "src/main/java/com/mycompany/fos_app/Data/runner.txt";
+            } else if (selectedRole.equals("Manager")) {
+                filename = "src/main/java/com/mycompany/fos_app/Data/manager.txt";
+            } else {
+                JOptionPane.showMessageDialog(null, "Invalid role selected.");
+                return;
+            }
+
             FileReader fr = new FileReader(filename);
             BufferedReader br = new BufferedReader(fr);
-            String idgui = idTxt.getText();
-//          Reads the plain password
-            String passwordgui = new String(passwordTxt.getPassword());
             String read;
             boolean found = false;
-            
-//          Reading the txt file
-            while((read = br.readLine()) != null) {
-                String idfile = read.split(";")[0];
-                String passwordfile = read.split(";")[1];
-                if(idgui.equals(idfile) && passwordgui.equals(passwordfile)) {
+
+            // Reading the txt file
+            while ((read = br.readLine()) != null) {
+                String[] data = read.split(";");
+                String idfile = data[0];
+                String passwordfile = data[1];
+
+                if (idgui.equals(idfile) && passwordgui.equals(passwordfile)) {
                     found = true;
-                    
-                    // set id for the other interface
-                    this.setId(idTxt.getText());
-                    break; // stop the while loop 
+                    this.setId(idgui); // Set ID for session tracking
+                    break; // Stop loop once found
                 }
             }
-            if(found) {
-                JOptionPane.showMessageDialog(null, "Successfully Login");
-                this.dispose(); // closes current form
-//                new Home().setVisible(true); // open the Home form
+            br.close();
+
+            if (found) {
+                JOptionPane.showMessageDialog(null, "Successfully Logged In");
+                this.dispose(); // Close current form
+
+                // Redirect based on role
+                if (selectedRole.equals("Admin")) {
+                    new Admin_Dashboard().setVisible(true);
+                } else {
+                    // the different role redirect to own page is here !!!!
+//                    new StaffDashboard(selectedRole).setVisible(true); // Generic page for Vendor/Runner
+                }
             } else {
-                JOptionPane.showMessageDialog(null, "Invalid Id or Password");
+                JOptionPane.showMessageDialog(null, "Invalid ID or Password");
             }
-        } catch(IOException e) {
-            JOptionPane.showMessageDialog(null, e.getMessage());
+        } catch (IOException e) {
+            JOptionPane.showMessageDialog(null, "Error: " + e.getMessage());
         }
     }//GEN-LAST:event_loginbtnActionPerformed
 

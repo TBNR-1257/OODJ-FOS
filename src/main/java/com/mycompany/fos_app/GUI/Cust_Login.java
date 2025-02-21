@@ -158,7 +158,7 @@ public class Cust_Login extends javax.swing.JFrame {
         // TODO add your handling code here:
         
         try {
-            String filename = "customer.txt";
+            String filename = "src/main/java/com/mycompany/fos_app/Data/customer.txt";
             FileReader fr = new FileReader(filename);
             BufferedReader br = new BufferedReader(fr);
             String idgui = idTxt.getText();
