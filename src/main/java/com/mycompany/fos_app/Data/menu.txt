@@ -1,0 +1,18 @@
+IT001;Hawaiian Pizza;Tropical pizza with ham and pineapple;14.5;Food;Yes;V003
+IT002;Classic Cheeseburger;Juicy beef patty with cheddar cheese and pickles;13.5;Food;No;V003
+IT003;Lemonade;Refreshing lemonade made from freshly squeezed lemons;6.0;Beverage;Yes;V003
+IT004;Chicken Caesar Salad;Crispy chicken with romaine lettuce and Caesar dressing;17.0;Food;Yes;V003
+IT005;Grilled Cheese Sandwich;Classic grilled cheese with melted cheddar on toasted bread;10.5;Food;Yes;V003
+IT006;Iced Green Tea;Lightly sweetened iced green tea with lemon;7.0;Beverage;No;V003
+IT001;Pepperoni Pizza;Spicy pepperoni with melted mozzarella and tomato sauce;16.0;Food;Yes;V002
+IT002;Vegan Burger;Plant-based patty with avocado, lettuce, and tomato;14.0;Food;Yes;V002
+IT003;Iced Matcha Latte;A smooth iced matcha latte with a touch of vanilla syrup;9.5;Beverage;Yes;V002
+IT004;Grilled Salmon;Perfectly grilled salmon fillet with garlic butter sauce;20.0;Food;No;V002
+IT005;Falafel Pita;Pita stuffed with crispy falafel, tahini, and pickled veggies;12.0;Food;Yes;V002
+IT006;Hot Chocolate;Rich and creamy hot chocolate with a dash of cinnamon;6.5;Beverage;Yes;V002
+IT001;Margherita Pizzas;Classic Margherita pizza with fresh basil and mozzarella;15.0;Food;Yes;V001
+IT002;BBQ Chicken Burger;Grilled chicken patty with BBQ sauce and crispy onions;14.5;Food;No;V001
+IT003;Mango Smoothie;A refreshing mango smoothie with a creamy texture;9.0;Beverage;Yes;V001
+IT004;Spicy Tuna Sushi;Fresh tuna wrapped in sushi rice with spicy mayo;18.0;Food;Yes;V001
+IT005;Vegetarian Wrap;Whole wheat wrap filled with grilled vegetables and hummus;13.0;Food;Yes;V001
+IT006;Iced Cappuccino;Chilled cappuccino topped with whipped cream and chocolate;7.5;Beverage;No;V001
