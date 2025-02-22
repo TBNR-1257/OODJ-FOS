@@ -175,9 +175,19 @@ public class Cust_Login extends javax.swing.JFrame {
                     JOptionPane.showMessageDialog(this, "Successfully Logged In!");
 
                     // Pass the user ID to the next interface
-                    this.dispose(); // Close login form
-//                    Cust_Home customerHome = new Cust_Home(customer); // Assuming Cust_Home constructor takes a Customer object
-//                    customerHome.setVisible(true);
+                    if (!idInput.isEmpty()) {
+                    SessionManager.getInstance().setidInput(idInput); // Store user ID
+                    this.dispose();
+                    CustomerHome customerHome = new CustomerHome();
+                    customerHome.setVisible(true);
+                }   else {
+                    JOptionPane.showMessageDialog(null, "Please enter User ID!");
+                }
+                    
+                    
+                    // Pass the user ID to the next interface
+                    
+                    
                     break;
                 }
             }

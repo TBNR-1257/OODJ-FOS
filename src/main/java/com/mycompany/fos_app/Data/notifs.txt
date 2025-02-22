@@ -1,0 +1,4 @@
+C001;2025-02-22;Your order is accepted!
+C001;2025-02-20;Your order is cancelled!
+C001;2025-02-17;Your order has been prepared!
+C001;2025-02-15;Your order is out for delivery!
