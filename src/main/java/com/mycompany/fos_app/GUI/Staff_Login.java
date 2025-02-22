@@ -178,12 +178,14 @@ public class Staff_Login extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null, "Successfully Logged In");
                 this.dispose(); // Close login form
 
+                SessionManager.getInstance().setidInput(idInput);
+                
                 // Redirect based on role
                 if (selectedRole.equalsIgnoreCase("Admin")) {
                     new Admin_Dashboard().setVisible(true);
-                } else {
-                    // Redirect other staff to their respective dashboard
-//                    new StaffDashboard(loggedInUser).setVisible(true); // Assuming StaffDashboard accepts a User object !!!!!
+                } else if(selectedRole.equalsIgnoreCase("Runner")){
+                    MainMenuGUI menu = new MainMenuGUI();
+                    menu.setVisible(true);
                 }
             } else {
                 JOptionPane.showMessageDialog(null, "Invalid ID or Password", "Error", JOptionPane.ERROR_MESSAGE);

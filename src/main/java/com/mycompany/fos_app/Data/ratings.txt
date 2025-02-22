@@ -1,0 +1,10 @@
+1090;V001;R001;Burrito Bowl;21.00;09-10-2023;Love the food;5
+1091;V002;R002;Shawarma;18.50;10-10-2023;Tasty and juicy;4
+1092;V003;R001;Pizza Margherita;25.00;11-10-2023;Cheesy delight;5
+1093;V004;R001;Spaghetti Carbonara;22.75;12-10-2023;Rich and creamy;4
+1094;V005;R002;Grilled Chicken;20.00;13-10-2023;Perfectly cooked;5
+1095;V006;R002;Fish and Chips;19.00;14-10-2023;Crispy and fresh;4
+1096;V007;R002;Sushi Platter;30.00;15-10-2023;Authentic flavors;5
+1097;V008;R001;Tandoori Chicken;24.50;16-10-2023;Spicy and tender;5
+1098;V009;R001;Cheeseburger;15.00;17-10-2023;Great taste;4
+1099;V010;R001;Caesar Salad;12.75;18-10-2023;Healthy and delicious;5

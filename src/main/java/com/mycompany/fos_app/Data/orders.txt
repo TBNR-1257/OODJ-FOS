@@ -1,0 +1,16 @@
+OR001;Lucas Wright;Burrito Bowl 1, Shawarma 2, Burger 3;21.00;Delivery;999 Ruby Road, Wangsa Maju;+1234567773;Completed;09-10-2023;C001;V001;R001;0
+OR002;Amelia King;Pizza 1, Pasta 1;30.50;Delivery;888 Emerald Drive, Setapak;+1234567782;Completed;14-11-2023;C002;V002;R002;0
+OR003;Elijah Young;Steak 1, Wine 1;55.00;Dine-in;777 Sapphire Street, Mont Kiara;+1234567791;Completed;20-12-2023;C003;V003;R003;0
+OR004;Charlotte Hall;Salad 1, Juice 1;16.50;Delivery;666 Birchwood Ave, Kepong;+1234567800;Completed;07-01-2024;C004;V004;R002;0
+OR005;Benjamin Clark;Sushi Platter 1;40.00;Delivery;555 Willow Lane, Seremban;+1234567811;Completed;28-02-2025;C005;V005;R005;0
+OR006;Mia Lewis;Pasta 1, Garlic Bread 1;29.50;Dine-in;404 Oak Grove, Kajang;+1234567822;Completed;15-03-2025;C006;V006;R006;0
+OR007;William Taylor;Pizza 1, Wings 1;32.00;Delivery;202 Spruce Road, Klang;+1234567833;Completed;10-04-2025;C007;V007;R007;0
+OR008;Isabella Lee;Burger 1, Fries 1;20.00;Pickup;919 Elm Drive, Petaling Jaya;+1234567842;Completed;21-05-2025;C008;V008;R008;0
+OR009;James Scott;Lobster 1, Pasta 1;50.00;Dine-in;818 Bay Street, Ampang;+1234567855;Completed;05-06-2025;C009;V009;R009;0
+OR010;Sophia Martinez;Fried Chicken 1;27.00;Delivery;707 Palm Road, Puchong;+1234567869;Completed;30-07-2025;C010;V010;R010;0
+OR011;Oliver Harris;Burrito 1;19.50;Pickup;333 Cedar Avenue, Cyberjaya;+1234567875;Completed;12-08-2025;C011;V011;R011;0
+OR012;Emma Thomas;Sushi 1, Ramen 1;35.00;Dine-in;505 Cherry Lane, Bangsar;+1234567885;Completed;18-09-2025;C012;V012;R012;0
+OR013;Noah Anderson;Tacos 1;22.50;Delivery;909 Pine Street, Shah Alam;+1234567881;Completed;25-10-2025;C013;V013;R013;0
+OR014;Ava Wilson;Sandwich 1, Salad 1;18.75;Pickup;303 Birch Street, KLCC;+1234567898;Completed;05-11-2025;C014;V014;R014;0
+OR015;Ethan Brown;Steak 1;45.00;Dine-in;222 Maple Street, KL Sentral;+1234567893;Completed;15-12-2025;C015;V015;R015;0
+OR016;Liam Martinez;Pizza 1, Pasta 1;28.50;Delivery;1010 Oak Grove, Kajang;+1234567882;Completed;20-01-2025;C016;V016;R016;0
