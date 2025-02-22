@@ -189,7 +189,9 @@ public class Staff_Login extends javax.swing.JFrame {
                 } else if(selectedRole.equalsIgnoreCase("Runner")){
                     MainMenuGUI menu = new MainMenuGUI();
                     menu.setVisible(true);
-                } 
+                } else if (selectedRole.equalsIgnoreCase("Manager")){
+                    new MainMenuManagerGUI().setVisible(true); 
+                }
             } else {
                 JOptionPane.showMessageDialog(null, "Invalid ID or Password", "Error", JOptionPane.ERROR_MESSAGE);
             }

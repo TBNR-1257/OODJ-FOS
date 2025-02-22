@@ -1,0 +1,3 @@
+C001;FujiKaze;Bad UI sorry;GG
+C002;Kilimanjaro;Indigo;Nice
+C002;Kilimanjaro;Indigo;
