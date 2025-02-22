@@ -1,0 +1,2 @@
+C001;FujiKaze;qwe;30.0
+C003;Kareshma;qwe;0.00
