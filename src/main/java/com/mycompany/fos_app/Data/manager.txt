@@ -1,2 +1,1 @@
-M001;Acip;qweqwe
-M002;qwe;qweqwe
+M001;Acip;qwe

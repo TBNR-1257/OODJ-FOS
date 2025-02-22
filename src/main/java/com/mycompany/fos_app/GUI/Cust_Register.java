@@ -4,13 +4,10 @@
  */
 package com.mycompany.fos_app.GUI;
 
-import com.mycompany.fos_app.Models.Customer;
+import static com.mycompany.fos_app.Models.UserManager.addUser;
 import java.io.BufferedReader;
-import java.io.BufferedWriter;
 import java.io.FileReader;
-import java.io.FileWriter;
 import java.io.IOException;
-import java.io.PrintWriter;
 import javax.swing.JOptionPane;
 
 /**
@@ -38,13 +35,11 @@ public class Cust_Register extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        emailTxt = new javax.swing.JTextField();
+        nameTxt = new javax.swing.JTextField();
         passwordTxt = new javax.swing.JPasswordField();
         confirmPasswordTxt = new javax.swing.JPasswordField();
         backBtn = new javax.swing.JButton();
         registerBtn = new javax.swing.JButton();
-        jLabel6 = new javax.swing.JLabel();
-        phoneTxt = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -59,7 +54,7 @@ public class Cust_Register extends javax.swing.JFrame {
 
         jLabel2.setText("ID :");
 
-        jLabel3.setText("Email :");
+        jLabel3.setText("Name :");
 
         jLabel4.setText("Password :");
 
@@ -85,18 +80,10 @@ public class Cust_Register extends javax.swing.JFrame {
             }
         });
 
-        jLabel6.setText("Phone :");
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(88, Short.MAX_VALUE)
-                .addComponent(backBtn)
-                .addGap(83, 83, 83)
-                .addComponent(registerBtn)
-                .addGap(84, 84, 84))
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
@@ -109,11 +96,7 @@ public class Cust_Register extends javax.swing.JFrame {
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                 .addComponent(jLabel3)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(emailTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(jLabel6)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(phoneTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(nameTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addComponent(jLabel5)
@@ -124,8 +107,13 @@ public class Cust_Register extends javax.swing.JFrame {
                                     .addComponent(confirmPasswordTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(150, 150, 150)
-                        .addComponent(jLabel1)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(jLabel1))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(85, 85, 85)
+                        .addComponent(backBtn)
+                        .addGap(83, 83, 83)
+                        .addComponent(registerBtn)))
+                .addContainerGap(87, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -139,11 +127,7 @@ public class Cust_Register extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
-                    .addComponent(emailTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel6)
-                    .addComponent(phoneTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(nameTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
@@ -152,11 +136,11 @@ public class Cust_Register extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
                     .addComponent(confirmPasswordTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 35, Short.MAX_VALUE)
+                .addGap(35, 35, 35)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(backBtn)
                     .addComponent(registerBtn))
-                .addGap(22, 22, 22))
+                .addContainerGap(56, Short.MAX_VALUE))
         );
 
         pack();
@@ -170,69 +154,62 @@ public class Cust_Register extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_passwordTxtActionPerformed
 
-    private boolean isIdExists(String id) {
-        try (BufferedReader br = new BufferedReader(new FileReader("customer.txt"))) {
+    private boolean isIdExists(String id, String filePath) {
+        try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
             String line;
             while ((line = br.readLine()) != null) {
-                String existingId = line.split(";")[0];
+                String existingId = line.split(";")[0]; // Extract ID from each line
                 if (id.equals(existingId)) {
                     return true;
                 }
             }
         } catch (IOException e) {
-            // If file doesn't exist, then id doesn't exist
+            // If file doesn't exist, assume ID doesn't exist
             return false;
         }
         return false;
     }
+
     
     private void registerBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registerBtnActionPerformed
         // TODO add your handling code here:
         
         try {
-            // Get all the values from your form fields
-            String id = idTxt.getText();
-            String email = emailTxt.getText();
+            // Get all input values from form fields
+            String id = idTxt.getText().trim();
+            String name = nameTxt.getText().trim();
             String password = new String(passwordTxt.getPassword());
             String confirmPassword = new String(confirmPasswordTxt.getPassword());
-            String phone = phoneTxt.getText();
 
             // Basic validation
-            if(id.isEmpty() || email.isEmpty() || password.isEmpty() || confirmPassword.isEmpty()) {
-                JOptionPane.showMessageDialog(this, "Please fill in all fields");
+            if (id.isEmpty() || name.isEmpty() || password.isEmpty() || confirmPassword.isEmpty()) {
+                JOptionPane.showMessageDialog(this, "Please fill in all fields", "Error", JOptionPane.ERROR_MESSAGE);
                 return;
             }
 
-     
-            // Check if id already exists
-            if(isIdExists(id)) {
-                JOptionPane.showMessageDialog(this, "ID already exists");
-                return;
-            }
-            
-            // Check if both Password and COnfirm Password is the same
+            // Check if passwords match
             if (!password.equals(confirmPassword)) {
-                JOptionPane.showMessageDialog(this, "Passwords do not match");
+                JOptionPane.showMessageDialog(this, "Passwords do not match", "Error", JOptionPane.ERROR_MESSAGE);
                 return;
             }
-            
-            // Create new Customer object
-            Customer newCustomer = new Customer(id, email, password, phone);
 
-            // Save to file
-            try (FileWriter fw = new FileWriter("src/main/java/com/mycompany/fos_app/Data/customer.txt", true);
-                 BufferedWriter bw = new BufferedWriter(fw);
-                 PrintWriter out = new PrintWriter(bw)) {
-                out.println(newCustomer.toFileString());
-                JOptionPane.showMessageDialog(this, "Registration successful!");
-
-                // Close registration form and open login form
-                this.dispose();
-                new Cust_Login().setVisible(true);
+            // Check if ID already exists
+            if (isIdExists(id, "src/main/java/com/mycompany/fos_app/Data/customer.txt")) {
+                JOptionPane.showMessageDialog(this, "ID already exists", "Error", JOptionPane.ERROR_MESSAGE);
+                return;
             }
 
-        } catch(IOException e) {
-            JOptionPane.showMessageDialog(this, "Error: " + e.getMessage());
+            // Create and add a new Customer using OOP approach
+            addUser(id, name, password, "customer");
+
+            JOptionPane.showMessageDialog(this, "Registration successful!", "Success", JOptionPane.INFORMATION_MESSAGE);
+
+            // Close registration form and open login form
+            this.dispose();
+            new Cust_Login().setVisible(true);
+
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Error: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_registerBtnActionPerformed
 
@@ -280,16 +257,14 @@ public class Cust_Register extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton backBtn;
     private javax.swing.JPasswordField confirmPasswordTxt;
-    private javax.swing.JTextField emailTxt;
     private javax.swing.JTextField idTxt;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
+    private javax.swing.JTextField nameTxt;
     private javax.swing.JPasswordField passwordTxt;
-    private javax.swing.JTextField phoneTxt;
     private javax.swing.JButton registerBtn;
     // End of variables declaration//GEN-END:variables
 }

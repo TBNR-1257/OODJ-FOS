@@ -4,6 +4,11 @@
  */
 package com.mycompany.fos_app.GUI;
 
+import com.mycompany.fos_app.Models.Admin;
+import com.mycompany.fos_app.Models.Manager;
+import com.mycompany.fos_app.Models.Runner;
+import com.mycompany.fos_app.Models.User;
+import com.mycompany.fos_app.Models.Vendor;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
@@ -50,7 +55,7 @@ public class Staff_Login extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jLabel1.setFont(new java.awt.Font("Montserrat Thin", 3, 24)); // NOI18N
-        jLabel1.setText("Login");
+        jLabel1.setText("Staff Login");
 
         jLabel2.setText("ID :");
 
@@ -77,24 +82,27 @@ public class Staff_Login extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(170, 170, 170)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(loginbtn)
-                    .addComponent(jLabel1))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(layout.createSequentialGroup()
                 .addGap(101, 101, 101)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel2)
-                    .addComponent(jLabel3)
-                    .addComponent(jLabel4))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(roleComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(passwordTxt)
-                        .addComponent(idTxt, javax.swing.GroupLayout.DEFAULT_SIZE, 143, Short.MAX_VALUE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel2)
+                            .addComponent(jLabel3)
+                            .addComponent(jLabel4))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(roleComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(passwordTxt)
+                                .addComponent(idTxt, javax.swing.GroupLayout.DEFAULT_SIZE, 143, Short.MAX_VALUE))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(37, 37, 37)
+                        .addComponent(jLabel1)))
                 .addGap(0, 101, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(170, 170, 170)
+                .addComponent(loginbtn)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -124,60 +132,65 @@ public class Staff_Login extends javax.swing.JFrame {
     private void loginbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginbtnActionPerformed
         // TODO add your handling code here:
         try {
-            String idgui = idTxt.getText();
-            String passwordgui = new String(passwordTxt.getPassword());
-            String selectedRole = roleComboBox.getSelectedItem().toString(); // Get selected role
+            String idInput = idTxt.getText().trim();
+            String passwordInput = new String(passwordTxt.getPassword()).trim();
+            String selectedRole = roleComboBox.getSelectedItem().toString();
 
             // Determine the correct file based on role selection
-            String filename = "";
-            if (selectedRole.equals("Admin")) {
-                filename = "src/main/java/com/mycompany/fos_app/Data/admin.txt";
-            } else if (selectedRole.equals("Vendor")) {
-                filename = "src/main/java/com/mycompany/fos_app/Data/vendor.txt";
-            } else if (selectedRole.equals("Runner")) {
-                filename = "src/main/java/com/mycompany/fos_app/Data/runner.txt";
-            } else if (selectedRole.equals("Manager")) {
-                filename = "src/main/java/com/mycompany/fos_app/Data/manager.txt";
-            } else {
-                JOptionPane.showMessageDialog(null, "Invalid role selected.");
-                return;
-            }
+            String filename = "src/main/java/com/mycompany/fos_app/Data/" + selectedRole.toLowerCase() + ".txt";
 
-            FileReader fr = new FileReader(filename);
-            BufferedReader br = new BufferedReader(fr);
-            String read;
+            BufferedReader br = new BufferedReader(new FileReader(filename));
+            String line;
             boolean found = false;
+            User loggedInUser = null;
 
-            // Reading the txt file
-            while ((read = br.readLine()) != null) {
-                String[] data = read.split(";");
-                String idfile = data[0];
-                String passwordfile = data[1];
+            // Read the file line by line
+            while ((line = br.readLine()) != null) {
+                User user = null;
 
-                if (idgui.equals(idfile) && passwordgui.equals(passwordfile)) {
+                switch (selectedRole.toLowerCase()) {
+                    case "admin":
+                        user = Admin.fromFileString(line);
+                        break;
+                    case "vendor":
+                        user = Vendor.fromFileString(line);
+                        break;
+                    case "runner":
+                        user = Runner.fromFileString(line);
+                        break;
+                    case "manager":
+                        user = Manager.fromFileString(line);
+                        break;
+                    default:
+                        JOptionPane.showMessageDialog(this, "Invalid role selected.");
+                        return;
+                }
+
+                if (user != null && idInput.equals(user.getId()) && passwordInput.equals(user.getPassword())) {
                     found = true;
-                    this.setId(idgui); // Set ID for session tracking
-                    break; // Stop loop once found
+                    loggedInUser = user;
+                    break;
                 }
             }
             br.close();
 
-            if (found) {
+            if (found && loggedInUser != null) {
                 JOptionPane.showMessageDialog(null, "Successfully Logged In");
-                this.dispose(); // Close current form
+                this.dispose(); // Close login form
 
                 // Redirect based on role
-                if (selectedRole.equals("Admin")) {
+                if (selectedRole.equalsIgnoreCase("Admin")) {
                     new Admin_Dashboard().setVisible(true);
                 } else {
-                    // the different role redirect to own page is here !!!!
-//                    new StaffDashboard(selectedRole).setVisible(true); // Generic page for Vendor/Runner
+                    // Redirect other staff to their respective dashboard
+//                    new StaffDashboard(loggedInUser).setVisible(true); // Assuming StaffDashboard accepts a User object !!!!!
                 }
             } else {
-                JOptionPane.showMessageDialog(null, "Invalid ID or Password");
+                JOptionPane.showMessageDialog(null, "Invalid ID or Password", "Error", JOptionPane.ERROR_MESSAGE);
             }
+
         } catch (IOException e) {
-            JOptionPane.showMessageDialog(null, "Error: " + e.getMessage());
+            JOptionPane.showMessageDialog(null, "Error: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_loginbtnActionPerformed
 

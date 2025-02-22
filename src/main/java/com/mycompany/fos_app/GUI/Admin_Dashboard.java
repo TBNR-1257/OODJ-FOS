@@ -169,7 +169,7 @@ public class Admin_Dashboard extends javax.swing.JFrame {
                 filename = "src/main/java/com/mycompany/fos_app/Data/runner.txt";
                 break;
             case "Manager":
-                filename = "src/main/java/com/mycompany/fos_app/Data/runner.txt";
+                filename = "src/main/java/com/mycompany/fos_app/Data/manager.txt"; 
                 break;
             default:
                 JOptionPane.showMessageDialog(this, "Invalid Role Selected!");
@@ -181,6 +181,7 @@ public class Admin_Dashboard extends javax.swing.JFrame {
             String line = br.readLine();
 
             if (line == null) {
+                br.close();
                 DefaultTableModel model = (DefaultTableModel) userTable.getModel();
                 model.setRowCount(0);
                 JOptionPane.showMessageDialog(this, "No data found for " + role);
@@ -191,9 +192,14 @@ public class Admin_Dashboard extends javax.swing.JFrame {
             String[] columnNames = getColumnHeaders(role);
             DefaultTableModel model = new DefaultTableModel(columnNames, 0);
 
-            // Populate table with data
+            // Populate table with data, ensuring correct column count
             do {
-                model.addRow(line.split(";"));
+                String[] data = line.split(";");
+                if (data.length == columnNames.length) {
+                    model.addRow(data);
+                } else {
+                    System.out.println("Skipping malformed entry: " + line);
+                }
             } while ((line = br.readLine()) != null);
 
             userTable.setModel(model);
@@ -204,19 +210,19 @@ public class Admin_Dashboard extends javax.swing.JFrame {
         }
     }
 
-    
+   
     private String[] getColumnHeaders(String role) {
         switch (role) {
             case "Admin":
                 return new String[]{"ID", "Name", "Password"};
             case "Customer":
-                return new String[]{"ID", "Email", "Password", "Phone", "Credit Balance"};
+                return new String[]{"ID", "Name", "Password", "Credit Balance"};
             case "Vendor":
                 return new String[]{"ID", "Name", "Password"};
-//            case "Runner":
-//                return new String[]{"ID", "Name", "Password", "Vehicle Type"};
-//            case "Manager":
-//                return new String[]{"ID", "Name", "Password", "Vehicle Type"};
+            case "Runner":
+                return new String[]{"ID", "Name", "Password"};
+            case "Manager":
+                return new String[]{"ID", "Name", "Password"};
             default:
                 return new String[]{};
         }
@@ -230,6 +236,8 @@ public class Admin_Dashboard extends javax.swing.JFrame {
 
     private void topupBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_topupBtnActionPerformed
         // TODO add your handling code here:
+        this.dispose(); 
+        new TopUp_Page().setVisible(true);
     }//GEN-LAST:event_topupBtnActionPerformed
 
     private void saveUpdatedData(String role, DefaultTableModel model) {
@@ -240,6 +248,7 @@ public class Admin_Dashboard extends javax.swing.JFrame {
             case "Customer": filename = "src/main/java/com/mycompany/fos_app/Data/customer.txt"; break;
             case "Vendor": filename = "src/main/java/com/mycompany/fos_app/Data/vendor.txt"; break;
             case "Runner": filename = "src/main/java/com/mycompany/fos_app/Data/runner.txt"; break;
+            case "Manager": filename = "src/main/java/com/mycompany/fos_app/Data/manager.txt"; break;
             default:
                 JOptionPane.showMessageDialog(this, "Invalid role selected!");
                 return;
@@ -278,18 +287,25 @@ public class Admin_Dashboard extends javax.swing.JFrame {
 
         // Array to store updated values
         String[] updatedData = new String[columnCount];
+        boolean isCanceled = false;
 
         for (int i = 0; i < columnCount; i++) {
-            String currentValue = model.getValueAt(selectedRow, i).toString(); // Get current value
-            updatedData[i] = JOptionPane.showInputDialog(this, "Edit " + model.getColumnName(i), currentValue);
+            String currentValue = model.getValueAt(selectedRow, i).toString();
+            String newValue = JOptionPane.showInputDialog(this, "Edit " + model.getColumnName(i), currentValue);
 
-            // If cancel is pressed, stop updating
-            if (updatedData[i] == null) {
-                return;
+            if (newValue == null) { // If user cancels, discard all changes
+                isCanceled = true;
+                break;
             }
+            updatedData[i] = newValue;
         }
 
-        // Update table with new values
+        if (isCanceled) {
+            JOptionPane.showMessageDialog(this, "Edit canceled.");
+            return;
+        }
+
+        // Apply the changes only if not canceled
         for (int i = 0; i < columnCount; i++) {
             model.setValueAt(updatedData[i], selectedRow, i);
         }

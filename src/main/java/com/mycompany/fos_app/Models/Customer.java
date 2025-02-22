@@ -9,42 +9,26 @@ package com.mycompany.fos_app.Models;
  * @author User
  */
 public class Customer extends User {
-    private String phone;
     private double creditBalance;
 
-    public Customer(String id, String email,String password, 
-                   String phone, double creditBalance) {
-        super(id, email, password);
-        this.phone = phone;
+    public Customer(String id, String name, String password, double creditBalance) {
+        super(id, name, password);
         this.creditBalance = creditBalance;
     }
-    
-    public Customer(String id, String email, String password, String phone) {
-        this(id, email, password, phone, 0.0); // Initialize with 0 credit
+
+    public Customer(String id, String name, String password, String phone) {
+        this(id, name, password, 0.0);
     }
 
-    public double getCreditBalance() { 
-        return creditBalance; 
-    }
-    public void setCreditBalance(double creditBalance) { 
-        this.creditBalance = creditBalance; 
-    }
+    public double getCreditBalance() { return creditBalance; }
+    public void setCreditBalance(double creditBalance) { this.creditBalance = creditBalance; }
 
-    // Method to format customer data for file storage
     public String toFileString() {
-        return String.format("%s;%s;%s;%s;%.2f", 
-            id, email, password, phone, creditBalance);
+        return String.format("%s;%s;%s;%.2f", id, name, password, creditBalance);
     }
 
-    // Method to create Customer object from file string
     public static Customer fromFileString(String fileString) {
         String[] parts = fileString.split(";");
-        return new Customer(
-            parts[0], // id
-            parts[1], // email
-            parts[2], // password
-            parts[3], // phone
-            Double.parseDouble(parts[4]) // creditBalance
-        );
+        return new Customer(parts[0], parts[1], parts[2], Double.parseDouble(parts[3]));
     }
 }

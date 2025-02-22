@@ -10,30 +10,16 @@ package com.mycompany.fos_app.Models;
  */
 public class Admin extends User {
 
-
-    public Admin(String id, String email, String password) {
-        super(id, email, password);
+    public Admin(String id, String name, String password) {
+        super(id, name, password);
     }
-    
-//    public Admin(String id, String email, String password) {
-//        this(id, email, password); // Initialize with 0 credit
-//    }
 
-    // Method to format customer data for file storage
     public String toFileString() {
-        return String.format("%s;%s;%s", 
-            id, email, password);
+        return String.format("%s;%s;%s", id, name, password);
     }
 
-    // Method to create Customer object from file string
-    public static Customer fromFileString(String fileString) {
+    public static Admin fromFileString(String fileString) {
         String[] parts = fileString.split(";");
-        return new Customer(
-            parts[0], // id
-            parts[1], // email
-            parts[2], // password
-            parts[3], // phone
-            Double.parseDouble(parts[4]) // creditBalance
-        );
+        return new Admin(parts[0], parts[1], parts[2]);
     }
 }

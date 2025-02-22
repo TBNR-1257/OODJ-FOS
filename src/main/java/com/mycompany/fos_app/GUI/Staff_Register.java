@@ -4,12 +4,7 @@
  */
 package com.mycompany.fos_app.GUI;
 
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.PrintWriter;
+import static com.mycompany.fos_app.Models.UserManager.addUser;
 import javax.swing.JOptionPane;
 
 /**
@@ -175,44 +170,34 @@ public class Staff_Register extends javax.swing.JFrame {
         // TODO add your handling code here:
         
         // Get input values
-        String id = idTxt.getText().trim();
-        String name = nameTxt.getText().trim();
-        String password = new String(passwordTxt.getPassword());
-        String confirmPassword = new String(confirmPasswordTxt.getPassword());
-        String role = roleComboBox.getSelectedItem().toString();
+         String id = idTxt.getText().trim();
+         String name = nameTxt.getText().trim();
+         String password = new String(passwordTxt.getPassword());
+         String confirmPassword = new String(confirmPasswordTxt.getPassword());
+         String role = roleComboBox.getSelectedItem().toString();
 
-        // Validation checks
-        if (id.isEmpty() || name.isEmpty() || password.isEmpty() || confirmPassword.isEmpty()) {
-            JOptionPane.showMessageDialog(this, "All fields must be filled!", "Error", JOptionPane.ERROR_MESSAGE);
-            return;
-        }
+         // Validation checks
+         if (id.isEmpty() || name.isEmpty() || password.isEmpty() || confirmPassword.isEmpty()) {
+             JOptionPane.showMessageDialog(this, "All fields must be filled!", "Error", JOptionPane.ERROR_MESSAGE);
+             return;
+         }
 
-        if (!password.equals(confirmPassword)) {
-            JOptionPane.showMessageDialog(this, "Passwords do not match!", "Error", JOptionPane.ERROR_MESSAGE);
-            return;
-        }
+         if (!password.equals(confirmPassword)) {
+             JOptionPane.showMessageDialog(this, "Passwords do not match!", "Error", JOptionPane.ERROR_MESSAGE);
+             return;
+         }
 
-        // Determine the file based on role
-        String filename = "src/main/java/com/mycompany/fos_app/Data/" + role.toLowerCase() + ".txt";
+         // Call the addUser method
+         addUser(id, name, password, role);
 
-        // Append new staff data to the respective text file
-        try (FileWriter fw = new FileWriter(filename, true);
-             BufferedWriter bw = new BufferedWriter(fw);
-             PrintWriter pw = new PrintWriter(bw)) {
+         JOptionPane.showMessageDialog(this, "Registration successful!", "Success", JOptionPane.INFORMATION_MESSAGE);
 
-            pw.println(id + ";" + name + ";" + password);
-            JOptionPane.showMessageDialog(this, "Registration successful!", "Success", JOptionPane.INFORMATION_MESSAGE);
-
-            // Clear input fields after successful registration
-            idTxt.setText("");
-            nameTxt.setText("");
-            passwordTxt.setText("");
-            confirmPasswordTxt.setText("");
-            roleComboBox.setSelectedIndex(0);
-
-        } catch (IOException e) {
-            JOptionPane.showMessageDialog(this, "Error saving data: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-        }
+         // Clear input fields after successful registration
+         idTxt.setText("");
+         nameTxt.setText("");
+         passwordTxt.setText("");
+         confirmPasswordTxt.setText("");
+         roleComboBox.setSelectedIndex(0);
     }//GEN-LAST:event_registerBtnActionPerformed
 
     private void backBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backBtnActionPerformed

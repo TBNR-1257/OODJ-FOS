@@ -4,7 +4,7 @@
  */
 package com.mycompany.fos_app.GUI;
 
-import com.mycompany.fos_app.GUI.Cust_Register;
+import com.mycompany.fos_app.Models.Customer;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
@@ -159,35 +159,36 @@ public class Cust_Login extends javax.swing.JFrame {
         
         try {
             String filename = "src/main/java/com/mycompany/fos_app/Data/customer.txt";
-            FileReader fr = new FileReader(filename);
-            BufferedReader br = new BufferedReader(fr);
-            String idgui = idTxt.getText();
-//          Reads the plain password
-            String passwordgui = new String(passwordTxt.getPassword());
-            String read;
+            BufferedReader br = new BufferedReader(new FileReader(filename));
+
+            String idInput = idTxt.getText().trim();
+            String passwordInput = new String(passwordTxt.getPassword()).trim();
+            String line;
             boolean found = false;
-            
-//          Reading the txt file
-            while((read = br.readLine()) != null) {
-                String idfile = read.split(";")[0];
-                String passwordfile = read.split(";")[2];
-                if(idgui.equals(idfile) && passwordgui.equals(passwordfile)) {
+
+            // Read the file line by line
+            while ((line = br.readLine()) != null) {
+                Customer customer = Customer.fromFileString(line);
+
+                if (idInput.equals(customer.getId()) && passwordInput.equals(customer.getPassword())) {
                     found = true;
-                    
-                    // set id for the other interface
-                    this.setId(idTxt.getText());
-                    break; // stop the while loop 
+                    JOptionPane.showMessageDialog(this, "Successfully Logged In!");
+
+                    // Pass the user ID to the next interface
+                    this.dispose(); // Close login form
+//                    Cust_Home customerHome = new Cust_Home(customer); // Assuming Cust_Home constructor takes a Customer object
+//                    customerHome.setVisible(true);
+                    break;
                 }
             }
-            if(found) {
-                JOptionPane.showMessageDialog(null, "Successfully Login");
-                this.dispose(); // closes current form
-//                new Home().setVisible(true); // CONNECT THIS TO CUSTOMER HOME PAGE
-            } else {
-                JOptionPane.showMessageDialog(null, "Invalid Id or Password");
+
+            if (!found) {
+                JOptionPane.showMessageDialog(this, "Invalid ID or Password", "Error", JOptionPane.ERROR_MESSAGE);
             }
-        } catch(IOException e) {
-            JOptionPane.showMessageDialog(null, e.getMessage());
+
+            br.close();
+        } catch (IOException e) {
+            JOptionPane.showMessageDialog(this, "Error: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_loginBtnActionPerformed
 

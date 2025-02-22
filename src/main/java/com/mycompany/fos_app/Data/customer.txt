@@ -1,2 +1,2 @@
-C001;bryanwth@gmail.com;qweqwe;0123456;0.00
-C002;hanhan@gmail.com;qweqwe;0123456;0.00
+C001;FujiKaze;qwe;30.0
+C003;Kareshma;qwe;0.00

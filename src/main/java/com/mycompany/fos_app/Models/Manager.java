@@ -8,9 +8,9 @@ package com.mycompany.fos_app.Models;
  *
  * @author User
  */
-public class Vendor extends User{
+public class Manager extends User {
     
-    public Vendor(String id, String name, String password) {
+    public Manager(String id, String name, String password) {
         super(id, name, password);
     }
 
@@ -18,8 +18,9 @@ public class Vendor extends User{
         return String.format("%s;%s;%s", id, name, password);
     }
 
-    public static Vendor fromFileString(String fileString) {
+    public static Manager fromFileString(String fileString) {
         String[] parts = fileString.split(";");
-        return new Vendor(parts[0], parts[1], parts[2]);
+        return new Manager(parts[0], parts[1], parts[2]);
     }
+    
 }
