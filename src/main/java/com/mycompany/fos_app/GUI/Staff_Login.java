@@ -68,7 +68,7 @@ public class Staff_Login extends javax.swing.JFrame {
             }
         });
 
-        roleComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Admin", "Vendor", "Runner" }));
+        roleComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Admin", "Vendor", "Runner", "Manager" }));
         roleComboBox.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 roleComboBoxActionPerformed(evt);
@@ -127,6 +127,7 @@ public class Staff_Login extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void loginbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginbtnActionPerformed
@@ -183,10 +184,12 @@ public class Staff_Login extends javax.swing.JFrame {
                 // Redirect based on role
                 if (selectedRole.equalsIgnoreCase("Admin")) {
                     new Admin_Dashboard().setVisible(true);
+                } else if (selectedRole.equalsIgnoreCase("Vendor")){
+                    new VendorDashboardForm().setVisible(true); 
                 } else if(selectedRole.equalsIgnoreCase("Runner")){
                     MainMenuGUI menu = new MainMenuGUI();
                     menu.setVisible(true);
-                }
+                } 
             } else {
                 JOptionPane.showMessageDialog(null, "Invalid ID or Password", "Error", JOptionPane.ERROR_MESSAGE);
             }
