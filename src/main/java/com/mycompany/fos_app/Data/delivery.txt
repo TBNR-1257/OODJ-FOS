@@ -1,0 +1,12 @@
+R001;Available
+R002;Available
+R003;Available
+R004;Assigned;1005;30.75;201 Maple Street, Wangsa Maju
+R005;Available
+R006;Occupied;1006;25.50;202 Oak Avenue, Ampang;	
+R007;Available
+R008;Occupied;1007;28.00;303 Cedar Road, Kuala Lumpur
+R009;Available
+R010;Occupied;1008;35.25;404 Birch Lane, Cheras
+R011;Available
+R012;Occupied;1009;27.50;505 Elm Street, Petaling Jaya
